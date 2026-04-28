@@ -1,0 +1,34 @@
+[
+  {
+    "name": "Артур Рейнс",
+    "birthDate": "17.01",
+    "age": 34,
+    "mbti": "INTJ",
+    "imageUrl": "https://t.me/Helensi_writer/20",
+    "imageLocal": "img/arthur.jpg"
+  },
+  {
+    "name": "Домінік Вейл",
+    "birthDate": "23.05",
+    "age": 22,
+    "mbti": "INFP",
+    "imageUrl": "https://t.me/Helensi_writer/25",
+    "imageLocal": "img/dominic.jpg"
+  },
+  {
+    "name": "Джейк Міллер",
+    "birthDate": "03.08",
+    "age": 23,
+    "mbti": "ESFP",
+    "imageUrl": "https://t.me/Helensi_writer/111",
+    "imageLocal": "img/jake.jpg"
+  },
+  {
+    "name": "Марта Міллер",
+    "birthDate": "11.11",
+    "age": 28,
+    "mbti": "ENFP",
+    "imageUrl": "https://t.me/Helensi_writer/344",
+    "imageLocal": "img/marta.jpg"
+  }
+]

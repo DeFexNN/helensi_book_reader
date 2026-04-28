@@ -24,12 +24,12 @@ function loadData() {
 }
 
 // API Routes
-app.get('/api/chapters', (req, res) => {
+app.get('/api/chapters.json', (req, res) => {
   const { chapters } = loadData();
   res.json(chapters);
 });
 
-app.get('/api/chapters/:number', (req, res) => {
+app.get('/api/chapters/:number.json', (req, res) => {
   const { chapters } = loadData();
   const chapter = chapters.find(ch => ch.number === parseInt(req.params.number));
   
@@ -40,7 +40,7 @@ app.get('/api/chapters/:number', (req, res) => {
   res.json(chapter);
 });
 
-app.get('/api/characters', (req, res) => {
+app.get('/api/characters.json', (req, res) => {
   const { characters } = loadData();
   res.json(characters);
 });

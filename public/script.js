@@ -65,7 +65,7 @@ function cacheElements() {
 // ─── Data Loading ────────────────────────────
 async function loadChapters() {
     try {
-        const res = await fetch('/api/chapters');
+        const res = await fetch('./api/chapters.json');
         allChapters = await res.json();
     } catch (e) {
         console.error('Помилка завантаження розділів:', e);
@@ -74,7 +74,7 @@ async function loadChapters() {
 
 async function loadCharacters() {
     try {
-        const res = await fetch('/api/characters');
+        const res = await fetch('./api/characters.json');
         const chars = await res.json();
         renderCharacters(chars);
     } catch (e) {

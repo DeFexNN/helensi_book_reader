@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "scrape": "node scraper.js"
+    "scrape": "node scraper.js",
+    "build": "node build.js"
   },
   "keywords": ["book", "reader"],
   "author": "",
