@@ -123,7 +123,7 @@ function openAddChapter() {
     document.getElementById('chapterStatus').value = 'published';
     document.getElementById('chapterUrl').value = '';
     document.getElementById('chapterAudio').value = '';
-    document.getElementById('chapterContent').value = '';
+    document.getElementById('chapterContent').innerHTML = '';
     document.getElementById('chapterModal').classList.add('open');
 }
 
@@ -137,7 +137,7 @@ function openEditChapter(number) {
     document.getElementById('chapterStatus').value = ch.status;
     document.getElementById('chapterUrl').value = ch.url || '';
     document.getElementById('chapterAudio').value = ch.audioUrl || '';
-    document.getElementById('chapterContent').value = ch.content || '';
+    document.getElementById('chapterContent').innerHTML = ch.content || '';
     document.getElementById('chapterModal').classList.add('open');
 }
 
@@ -153,7 +153,7 @@ async function saveChapter() {
         status: document.getElementById('chapterStatus').value,
         url: document.getElementById('chapterUrl').value.trim(),
         audioUrl: document.getElementById('chapterAudio').value.trim() || null,
-        content: document.getElementById('chapterContent').value,
+        content: document.getElementById('chapterContent').innerHTML,
     };
 
     if (!payload.title) { showToast('Введіть назву розділу', 'error'); return; }
@@ -359,6 +359,35 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('chapterCancelBtn').addEventListener('click', closeChapterModal);
     document.getElementById('chapterSaveBtn').addEventListener('click', saveChapter);
     document.getElementById('chapterModal').addEventListener('click', e => { if (e.target === document.getElementById('chapterModal')) closeChapterModal(); });
+
+    // WYSIWYG toolbar
+    document.getElementById('editorToolbar').addEventListener('mousedown', e => {
+        const btn = e.target.closest('button[data-cmd]');
+        if (!btn) return;
+        e.preventDefault();
+        const cmd = btn.dataset.cmd;
+        const val = btn.dataset.val || null;
+        document.execCommand(cmd, false, val);
+        document.getElementById('chapterContent').focus();
+    });
+    document.getElementById('editorClearFormat').addEventListener('mousedown', e => {
+        e.preventDefault();
+        document.execCommand('removeFormat', false, null);
+        document.execCommand('formatBlock', false, 'p');
+        document.getElementById('chapterContent').focus();
+    });
+    // Highlight active toolbar buttons on selection change
+    document.getElementById('chapterContent').addEventListener('keyup', updateToolbar);
+    document.getElementById('chapterContent').addEventListener('mouseup', updateToolbar);
+    document.getElementById('chapterContent').addEventListener('focus', updateToolbar);
+    function updateToolbar() {
+        document.querySelectorAll('#editorToolbar button[data-cmd]').forEach(btn => {
+            try {
+                const active = document.queryCommandState(btn.dataset.cmd);
+                btn.classList.toggle('active', active);
+            } catch {}
+        });
+    }
 
     // Character modal
     document.getElementById('addCharacterBtn').addEventListener('click', openAddCharacter);
