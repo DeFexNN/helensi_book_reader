@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Відтінки болю — Shades of Pain</title>
+    <meta name="description" content="Відтінки болю — психологічний триллер від Helensiaga. Читайте онлайн безкоштовно.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Mobile Header -->
+    <header class="mobile-header" id="mobileHeader">
+        <button class="menu-toggle" id="menuToggle" aria-label="Відкрити меню">
+            <span></span><span></span><span></span>
+        </button>
+        <span class="mobile-title">Відтінки болю</span>
+        <button class="back-to-home" id="backToHomeBtn" aria-label="На головну">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </button>
+    </header>
+
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="sidebar-logo">
+                <span class="logo-accent">✧</span> Відтінки болю <span class="logo-accent">✧</span>
+            </div>
+            <p class="sidebar-subtitle">Shades of Pain</p>
+            <button class="sidebar-close" id="sidebarClose" aria-label="Закрити меню">&times;</button>
+        </div>
+
+        <div class="sidebar-badge">
+            <span class="badge-18">18+</span>
+            <span class="badge-genre">Психологічний триллер</span>
+        </div>
+
+        <div class="sidebar-links">
+            <a href="https://send.monobank.ua/jar/8jHC3VxA1r" target="_blank" class="sidebar-link" id="linkDonate">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+                Підтримати
+            </a>
+            <a href="https://discord.gg/tMbxdnXVHa" target="_blank" class="sidebar-link" id="linkDiscord">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                Discord
+            </a>
+        </div>
+
+        <nav class="sidebar-nav">
+            <h3 class="sidebar-section-title">Розділи</h3>
+            <div id="chaptersMenu" class="chapters-list"></div>
+        </nav>
+
+        <div class="sidebar-characters">
+            <h3 class="sidebar-section-title">Персонажі</h3>
+            <button id="charactersBtn" class="sidebar-link characters-trigger">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                Переглядати
+            </button>
+        </div>
+
+        <div class="sidebar-footer">
+            <p>© Helensiaga</p>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main" id="main">
+        <!-- HERO / Landing Page -->
+        <section class="hero" id="heroSection">
+            <div class="hero-bg">
+                <div class="hero-grain"></div>
+                <div class="hero-gradient"></div>
+            </div>
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <span>18+</span>
+                    <span class="hero-badge-divider">•</span>
+                    <span>Психологічний триллер</span>
+                </div>
+                <h1 class="hero-title">
+                    <span class="hero-title-line">Відтінки</span>
+                    <span class="hero-title-line hero-title-accent">болю</span>
+                </h1>
+                <p class="hero-subtitle">Shades of Pain</p>
+                <p class="hero-description">
+                    Рукопис, який ще буде редагуватися. Історія про мистецтво, маніпуляцію та темні сторони людської душі.
+                </p>
+                <div class="hero-actions">
+                    <button class="hero-btn hero-btn-primary" id="startReadingBtn">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+                        Почати читати
+                    </button>
+                    <button class="hero-btn hero-btn-secondary" id="heroCharactersBtn">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                        Персонажі
+                    </button>
+                </div>
+
+                <div class="continue-banner" id="continueReadingBanner" style="display:none;">
+                    <span class="continue-text">Ви зупинилися на: <strong id="continueChapterName"></strong></span>
+                    <button class="hero-btn hero-btn-primary" style="padding: 8px 16px; font-size: 13px;" id="continueReadingBtn">Продовжити</button>
+                </div>
+                
+                <div class="hero-stats" id="heroStats"></div>
+            </div>
+            <div class="hero-scroll-hint">
+                <span>Оберіть розділ у меню</span>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+        </section>
+
+        <!-- Reader Section (hidden by default) -->
+        <section class="reader" id="readerSection" style="display:none;">
+            <div class="reader-settings" style="text-align: right; margin-bottom: 20px;">
+                <button id="modeToggleBtn" class="setting-btn" title="Змінити режим читання: Скрол / По сторінках">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+                    Режим: <span id="modeToggleText">Скрол</span>
+                </button>
+            </div>
+
+            <article id="contentContainer" class="reader-content"></article>
+
+            <div class="paged-nav" id="pagedNav" style="display: none;">
+                <button id="pagedPrevBtn" class="reader-nav-btn">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+                    <span>Назад</span>
+                </button>
+                <div class="paged-counter"><span id="pagedCurrent">1</span> / <span id="pagedTotal">1</span></div>
+                <button id="pagedNextBtn" class="reader-nav-btn">
+                    <span>Вперед</span>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+                </button>
+            </div>
+
+            <div class="reader-nav" id="readerNav">
+                <button id="prevBtn" class="reader-nav-btn" disabled>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+                    <span>Попередній</span>
+                </button>
+                <span id="chapterCounter" class="reader-counter"></span>
+                <button id="nextBtn" class="reader-nav-btn" disabled>
+                    <span>Наступний</span>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+                </button>
+            </div>
+        </section>
+
+        <!-- Character Page Section (hidden by default) -->
+        <section class="character-page-section" id="characterSection" style="display:none;">
+            <button class="back-btn" id="characterBackBtn">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+                Назад
+            </button>
+            <div class="char-page-container" id="characterPageContainer"></div>
+        </section>
+    </main>
+
+    <!-- Characters Modal -->
+    <div id="charactersModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" id="modalCloseBtn" aria-label="Закрити">&times;</button>
+            <h2 class="modal-title">Персонажі</h2>
+            <div id="charactersList" class="characters-grid"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
