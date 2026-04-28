@@ -25,15 +25,17 @@ exports.handler = async (event) => {
     if (!res.ok) throw new Error(`Telegraph returned ${res.status}`);
     const html = await res.text();
 
-    // Extract <article> content — Telegraph stores it in <article> inside .tl_article_content
+    // Extract <article> content
     const articleMatch = html.match(/<article[^>]*>([\s\S]*?)<\/article>/i);
     if (!articleMatch) return { statusCode: 422, headers: HEADERS, body: JSON.stringify({ error: 'Could not find article content' }) };
 
     let content = articleMatch[1];
 
-    // Extract only <p>, <em>, <strong>, <s>, <blockquote>, <h3>, <h4>, <br>, <hr>, <figure> tags
-    // Remove figure/img (images not needed), keep text structure
+    // Remove title (h1), author (address), and header meta — not part of chapter text
     content = content
+      .replace(/<h1[\s\S]*?<\/h1>/gi, '')
+      .replace(/<address[\s\S]*?<\/address>/gi, '')
+      .replace(/<header[\s\S]*?<\/header>/gi, '')
       .replace(/<figure[\s\S]*?<\/figure>/gi, '')   // remove images
       .replace(/<aside[\s\S]*?<\/aside>/gi, '')      // remove aside
       .replace(/<script[\s\S]*?<\/script>/gi, '')    // remove scripts
