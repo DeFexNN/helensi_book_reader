@@ -1,19 +1,17 @@
 {
-  "name": "shades-of-pain-reader",
-  "version": "1.0.0",
-  "description": "Web reader for Shades of Pain book",
-  "main": "server.js",
+  "name": "shades-of-pain-netlify",
+  "version": "2.0.0",
+  "description": "Відтінки болю — веб-читалка на Netlify + Firebase",
   "scripts": {
-    "start": "node server.js",
-    "scrape": "node scraper.js",
-    "build": "node build.js"
+    "dev": "netlify dev",
+    "build": "echo Done",
+    "seed": "node scripts/seed.js"
   },
-  "keywords": ["book", "reader"],
-  "author": "",
-  "license": "ISC",
   "dependencies": {
-    "express": "^4.18.2",
-    "axios": "^1.6.0",
-    "cheerio": "^1.0.0-rc.12"
+    "firebase-admin": "^12.0.0"
+  },
+  "devDependencies": {
+    "dotenv": "^16.0.0",
+    "netlify-cli": "^17.0.0"
   }
 }

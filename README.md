@@ -1,220 +1,92 @@
-# 📖 Відтінки болю - Web Reader
-## Shades of Pain - Web Reader
+# Відтінки болю — Netlify + Firebase
 
-Гарна і функціональна веб-платформа для читання розділів книги "Відтінки болю" з темною сірою гамою кольорів.
+Веб-читалка психологічного трилера «Відтінки болю» із адмін-панеллю.  
+БД: **Google Firebase Firestore**.
 
----
-
-## 🚀 Швидкий старт
-
-### Передумови
-- Node.js (версія 14 або вище)
-- npm
-
-### Встановлення
-
-1. **Встановіть залежності:**
-   ```bash
-   npm install
-   ```
-
-2. **Запустіть скрейпер (опційно):**
-   ```bash
-   npm run scrape
-   ```
-   Це завантажить актуальний контент з Telegraph та Telegram посилань.
-
-3. **Запустіть сервер:**
-   ```bash
-   npm start
-   ```
-
-4. **Відкрийте у браузері:**
-   ```
-   http://localhost:3000
-   ```
-
----
-
-## 📋 Структура проекту
+## Структура
 
 ```
-book/
-├── server.js              # Express сервер
-├── scraper.js             # Веб-скрейпер для завантаження розділів
-├── package.json           # Залежності проекту
-├── data/
-│   ├── chapters.json      # Дані розділів
-│   └── characters.json    # Дані персонажів
-└── public/
-    ├── index.html         # Основна сторінка
-    ├── styles.css         # Стилі (темна сіра гама)
-    └── script.js          # JavaScript для інтередативності
+new/
+├── netlify/
+│   └── functions/
+│       ├── _firebase.js     — ініціалізація Firebase Admin SDK
+│       ├── chapters.js      — API: GET/POST/PUT/DELETE /api/chapters
+│       └── characters.js    — API: GET/POST/PUT/DELETE /api/characters
+├── public/
+│   ├── index.html           — головна сторінка читача
+│   ├── styles.css           — стилі
+│   ├── script.js            — логіка читача
+│   ├── admin.html           — адмін-панель (/admin.html)
+│   ├── admin.js             — логіка адмін-панелі
+│   └── img/                 — ілюстрації персонажів
+├── data/                    — початкові JSON (для імпорту у Firebase)
+│   ├── chapters.json
+│   └── characters.json
+├── netlify.toml
+└── package.json
 ```
 
----
+## Налаштування Firebase
 
-## 🎨 Особливості
+1. Перейди на [console.firebase.google.com](https://console.firebase.google.com)
+2. Створи новий проект (або використай існуючий)
+3. **Firestore Database** → Create database → Production mode
+4. **Project Settings → Service accounts** → Generate new private key → скачай JSON
+5. Відкрий скачаний JSON, скопіюй **весь вміст** (це буде `FIREBASE_SERVICE_ACCOUNT`)
 
-✅ **Темна сіра гама кольорів** - Комфортно для очей при читанні
-✅ **Навігація між розділами** - Кнопки "Попередній" і "Наступний"
-✅ **Клавіатурні скорочення** - Стрілки `←` та `→` для навігації
-✅ **Список персонажів** - З інформацією про типи особистості (MBTI)
-✅ **Озвучка розділів** - Посилання на Telegram озвучку
-✅ **Адаптивний дизайн** - Працює на мобільних пристроях
-✅ **Автоматичний скрейпер** - Збирає контент з telegraph.ph та t.me
+## Розгортання на Netlify
 
----
+1. Push проект на GitHub / GitLab
+2. Підключити репозиторій → **New site from Git**
+3. Build command: *(порожньо або `echo ok`)*
+4. Publish directory: `public`
+5. Functions directory: `netlify/functions`
+6. **Site settings → Environment variables** → додати:
 
-## 🎛️ API Endpoints
+| Змінна | Значення |
+|---|---|
+| `ADMIN_TOKEN` | ваш секретний пароль для адміну |
+| `FIREBASE_SERVICE_ACCOUNT` | весь JSON з Firebase service account (в один рядок) |
 
-### Отримати всі розділи
-```
-GET /api/chapters
-```
-Повертає масив всіх розділів з метаданими.
+> Щоб перетворити JSON в один рядок для Netlify:  
+> `cat serviceAccount.json | jq -c .`  
+> або просто вставте весь текст JSON у поле — Netlify зберігає його правильно.
 
-### Отримати конкретний розділ
-```
-GET /api/chapters/:number
-```
-Повертає розділ з номером `:number`.
+## Імпорт початкових даних у Firestore
 
-### Отримати персонажів
-```
-GET /api/characters
-```
-Повертає масив даних про персонажів.
+Файли `data/chapters.json` і `data/characters.json` містять всі поточні дані.  
+Щоб завантажити їх у Firestore, запусти скрипт:
 
----
-
-## 📝 Використання скрейпера
-
-Скрейпер автоматично завантажує контент з:
-- Telegraph посилань (telegra.ph)
-- Telegram каналу (t.me)
-
-Дані кешуються в `data/chapters.json` і `data/characters.json`.
-
-**Запуск скрейпера:**
 ```bash
-npm run scrape
+node scripts/seed.js
 ```
 
-**Примітка:** Скрейпер може зайняти кілька хвилин. Між запитами є затримка, щоб не перевантажити сервери.
+*(або додай вручну через Firebase Console → Firestore)*
 
----
+## Адмін-панель
 
-## 🔧 Налаштування
+URL: `https://ваш-сайт.netlify.app/admin.html`
 
-### Зміна порту
-Відредагуйте `server.js`:
-```javascript
-const PORT = process.env.PORT || 3000;
-```
+Вводьте `ADMIN_TOKEN` в поле пароля.
 
-### Додавання нових розділів
-Додайте запис до `data/chapters.json`:
-```json
-{
-  "number": 20,
-  "title": "Розділ 20",
-  "url": "https://...",
-  "status": "published"
-}
-```
+- **Розділи** — додавання, редагування, видалення
+- **Персонажі** — CRUD для персонажів
 
-### Кольорова гама
-Колір визначається CSS змінними в `public/styles.css`:
-```css
-:root {
-    --dark-bg: #1a1a1a;
-    --accent: #b8b8b8;
-    /* ... інші кольори ... */
-}
-```
+## Локальна розробка
 
----
-
-## ⌨️ Клавіатурні скорочення
-
-| Клавіша | Дія |
-|---------|-----|
-| `←` | Попередній розділ |
-| `→` | Наступний розділ |
-
----
-
-## 🌐 Розгортання
-
-### Heroku
-1. Встановіть Heroku CLI
-2. Створіть додаток: `heroku create app-name`
-3. Розгорніть: `git push heroku main`
-
-### Vercel/Netlify
-1. Експортуйте `build` версію
-2. Розгорніть як статичний сайт
-
-### Власний сервер
-1. Встановіть Node.js на сервер
-2. Клонуйте репозиторій
-3. Запустіть `npm install && npm start`
-4. Налаштуйте nginx/Apache як reverse proxy
-
----
-
-## 🐛 Вирішення проблем
-
-### Сервер не запускається
 ```bash
-# Перевірте порт 3000
-lsof -i :3000  # macOS/Linux
-netstat -ano | findstr :3000  # Windows
+npm install
 ```
 
-### Скрейпер не завантажує контент
-- Перевірте інтернет з'єднання
-- Telegraph/Telegram можуть заблокувати запити
-- На Windows можуть знадобитися адміністраторські права
+Створи файл `.env` у корені:
+```
+ADMIN_TOKEN=test123
+FIREBASE_SERVICE_ACCOUNT={"type":"service_account","project_id":"...весь JSON..."}
+```
 
-### Сторінка не завантажується
-- Очистіть кеш браузера (`Ctrl+Shift+Del`)
-- Перевірте консоль браузера на помилки (`F12`)
-- Переконайтеся, що сервер запущений
+```bash
+npx netlify dev
+```
 
----
-
-## 📄 Ліцензія
-
-Контент книги "Відтінки болю" - авторські права його автора.
-
----
-
-## 👤 Автор проекту
-
-Навігаційна платформа для книги "Відтінки болю"
-
----
-
-## 📞 Контакти
-
-- 💵 Банка: https://send.monobank.ua/jar/8jHC3VxA1r
-- 🎮 Discord: https://discord.gg/tMbxdnXVHa
-- 📱 Telegram: https://t.me/Helensi_writer
-
----
-
-## 🎯 Майбутні функції
-
-- [ ] Пошук по тексту розділів
-- [ ] Закладки улюблених місць
-- [ ] Статистика читання
-- [ ] Коментарі до розділів
-- [ ] Темна/Світла тема (переключення)
-- [ ] Експорт розділів у PDF
-- [ ] Офлайн режим
-
----
-
-**Приємного читання! 📖✨**
+Сайт: http://localhost:8888  
+Адмін: http://localhost:8888/admin.html
