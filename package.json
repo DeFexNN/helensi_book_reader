@@ -1,0 +1,18 @@
+{
+  "name": "shades-of-pain-reader",
+  "version": "1.0.0",
+  "description": "Web reader for Shades of Pain book",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "scrape": "node scraper.js"
+  },
+  "keywords": ["book", "reader"],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "axios": "^1.6.0",
+    "cheerio": "^1.0.0-rc.12"
+  }
+}

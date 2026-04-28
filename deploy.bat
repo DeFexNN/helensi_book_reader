@@ -1,0 +1,9 @@
+@echo off
+echo [*] Adding files to git...
+git add .
+echo [*] Committing...
+git commit -m "Deploy update: UI and Character pages"
+echo [*] Pushing to remote repository...
+git push -u https://github.com/DeFexNN/helensi_book_reader.git main
+echo [*] Done!
+pause
