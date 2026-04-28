@@ -364,6 +364,29 @@
             color: var(--text-muted);
             pointer-events: none;
         }
+        /* ── Input with inline button ── */
+        .input-btn-row {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+        .input-btn-row .form-input { flex: 1; }
+        .btn-fetch {
+            flex-shrink: 0;
+            background: var(--bg-surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 9px 14px;
+            font-size: 13px;
+            font-family: var(--font-body);
+            font-weight: 600;
+            color: var(--text-secondary);
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.2s;
+        }
+        .btn-fetch:hover { border-color: var(--accent); color: var(--accent-light); }
+        .btn-fetch:disabled { opacity: 0.4; cursor: not-allowed; }
 
         .toast {
             position: fixed;
@@ -494,7 +517,10 @@
 
         <div class="form-group">
             <label class="form-label">Посилання (оригінал Telegraph)</label>
-            <input class="form-input" type="url" id="chapterUrl" placeholder="https://telegra.ph/...">
+            <div class="input-btn-row">
+                <input class="form-input" type="url" id="chapterUrl" placeholder="https://telegra.ph/...">
+                <button type="button" class="btn-fetch" id="fetchTelegraphBtn">⬇ Імпортувати</button>
+            </div>
         </div>
 
         <div class="form-group">

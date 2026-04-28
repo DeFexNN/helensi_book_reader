@@ -360,9 +360,29 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('chapterSaveBtn').addEventListener('click', saveChapter);
     document.getElementById('chapterModal').addEventListener('click', e => { if (e.target === document.getElementById('chapterModal')) closeChapterModal(); });
 
+    // Import from Telegraph
+    document.getElementById('fetchTelegraphBtn').addEventListener('click', async () => {
+        const url = document.getElementById('chapterUrl').value.trim();
+        if (!url) { showToast('Спочатку введіть посилання на Telegraph', 'error'); return; }
+        const btn = document.getElementById('fetchTelegraphBtn');
+        btn.disabled = true;
+        btn.textContent = '⏳ Завантаження…';
+        try {
+            const res = await fetch(`/api/telegraph?url=${encodeURIComponent(url)}`);
+            const data = await res.json();
+            if (!res.ok) throw new Error(data.error || 'Помилка');
+            document.getElementById('chapterContent').innerHTML = data.content;
+            showToast('Контент імпортовано ✓');
+        } catch (e) {
+            showToast('Не вдалося імпортувати: ' + e.message, 'error');
+        } finally {
+            btn.disabled = false;
+            btn.textContent = '⬇ Імпортувати';
+        }
+    });
+
     // WYSIWYG toolbar
-    document.getElementById('editorToolbar').addEventListener('mousedown', e => {
-        const btn = e.target.closest('button[data-cmd]');
+    document.getElementById('editorToolbar').addEventListener('mousedown', e => {        const btn = e.target.closest('button[data-cmd]');
         if (!btn) return;
         e.preventDefault();
         const cmd = btn.dataset.cmd;
